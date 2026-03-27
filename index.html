@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>西鉄バス謎解きチャレンジ_ver.K</title>
+</head>
+<body>
+
+<h2>🎯 ミッション</h2>
+<p id="missionText"></p>
+
+<input id="answer" placeholder="キーワード入力">
+<button onclick="checkAnswer()">送信</button>
+
+<p id="result"></p>
+
+<script>
+
+let missions = [];
+let current = 0;
+
+// 初期表示
+async function loadMissions() {
+  const res = await fetch("missions.json");
+  missions = await res.json();
+  loadMission();
+}
+
+// 判定
+function checkAnswer() {
+  const input = document.getElementById("answer").value.trim();
+
+  if (input.includes(missions[current].answer)) {
+    document.getElementById("result").innerText = "🎉 クリア！";
+
+    setTimeout(() => {
+      current++;
+
+      if (current < missions.length) {
+        loadMission();
+      } else {
+        document.getElementById("missionText").innerText = "🏆 全ミッションクリア！";
+        document.getElementById("answer").style.display = "none";
+      }
+    }, 1000);
+
+  } else {
+    document.getElementById("result").innerText = "❌ 違う！";
+  }
+}
+
+// 最初に呼ぶ
+loadMissions();
+</script>
+
+</body>
+</html>
