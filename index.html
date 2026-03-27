@@ -15,18 +15,23 @@
 <p id="result"></p>
 
 <script>
-
 let missions = [];
 let current = 0;
 
-// 初期表示
 async function loadMissions() {
   const res = await fetch("missions.json");
   missions = await res.json();
   loadMission();
 }
 
-// 判定
+function loadMission() {
+  document.getElementById("missionText").innerText =
+    `ミッション${current + 1}/${missions.length}：${missions[current].text}`;
+  
+  document.getElementById("result").innerText = "";
+  document.getElementById("answer").value = "";
+}
+
 function checkAnswer() {
   const input = document.getElementById("answer").value.trim();
 
@@ -40,7 +45,6 @@ function checkAnswer() {
         loadMission();
       } else {
         document.getElementById("missionText").innerText = "🏆 全ミッションクリア！";
-        document.getElementById("answer").style.display = "none";
       }
     }, 1000);
 
@@ -49,7 +53,6 @@ function checkAnswer() {
   }
 }
 
-// 最初に呼ぶ
 loadMissions();
 </script>
 
