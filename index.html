@@ -57,11 +57,13 @@ function checkAnswer() {
 
 loadMissions();
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js')
-    .then(() => console.log("Service Worker 登録成功"))
-    .catch(err => console.log("登録失敗", err));
-}
+window.addEventListener('load', () => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(() => console.log("Service Worker 登録成功"))
+      .catch(err => console.log("登録失敗", err));
+  }
+});
 </script>
 
 </body>
