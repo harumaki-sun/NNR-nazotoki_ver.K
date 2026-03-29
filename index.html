@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- PWA -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="theme-color" content="#4CAF50">
+
+
+  <title>西鉄バス謎解きチャレンジ_ver.K</title>
+</head>
+<body>
+
+<div class="container">
+
+<h2 id="time"></h2>
+<p id="progress"></p>
+<h3 id="question"></h3>
+
+<!-- コード入力 -->
+<div id="codeScreen">
+  <input id="codeInput" placeholder="認証コード">
+  <button onclick="checkCode()">送信</button>
+</div>
+
+<!-- 問題 -->
+<div id="questionScreen" style="display:none;">
+  <p id="errorMessage" style="color:red;"></p>
+  <h3 id="question"></h3>
+  <input id="answerInput" placeholder="答え">
+  <button onclick="checkAnswer()">判定</button>
+</div>
+
+<!-- 結果 -->
+<div id="resultScreen" style="display:none;">
+  <p id="result"></p>
+  <button onclick="goExplanation()">次へ</button>
+</div>
+
+<!-- 解説 -->
+<div id="explanationScreen" style="display:none;">
+  <p id="explanation"></p>
+  <button onclick="nextMission()">次のミッション</button>
+</div>
+
+<div id="clearScreen" style="display:none;">
+  <h2>congratulation!!</h2>
+  <p>チャレンジ達成おめでとう！<br>某tbqという方からインスパイアを受けて作ってみたのですが、けっこう移動がキツかったのではないのでしょうか。まあ私の名前もharm.Kなわけですし、危害になれていたなら幸いです。<br>次回があれば次回も、ご参加をお待ちしております。<br><br>あとはるまきさんからで、例の動画の後編、今年の夏とかに作れたらいいなって思ってるらしいですよ。</p>
+</div>
+
+<script src="app.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js")
+    .then(() => console.log("SW登録成功"))
+    .catch(err => console.log("SW登録失敗", err));
+}
+</script>
+</div>
+
+</body>
+</html>
